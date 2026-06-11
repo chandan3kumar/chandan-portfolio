@@ -29,11 +29,11 @@ body {
 }
 
 .side-nav a {
-  width: 68px;
-  height: 68px;
+  width: 58px;
+  height: 58px;
+  border-radius: 50px;
   background: #d7d9dc;
   color: #333;
-  border-radius: 50%;
   text-decoration: none;
 
   display: flex;
@@ -41,32 +41,59 @@ body {
   justify-content: center;
 
   font-size: 22px;
-  transition: all 0.3s ease;
   overflow: hidden;
+  transition: all 0.3s ease;
 }
 
 .side-nav a span {
-  display: none;
+  width: 0;
+  opacity: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  transition: all 0.3s ease;
 }
 
-.side-nav a:hover,
-.side-nav a.active {
+/* On hover show name */
+.side-nav a:hover {
   width: 160px;
-  border-radius: 50px;
   background: #8178ff;
   color: white;
   justify-content: flex-start;
-  padding-left: 24px;
-  gap: 15px;
+  padding-left: 22px;
+  gap: 14px;
 }
 
-.side-nav a:hover span,
+.side-nav a:hover span {
+  width: auto;
+  opacity: 1;
+}
+
+/* Auto active for 2 seconds when entering section */
+.side-nav a.active {
+  background: #8178ff;
+  color: white;
+}
+
+/* show text temporarily */
+.side-nav a.show-label {
+  width: 160px;
+  background: #8178ff;
+  color: white;
+  justify-content: flex-start;
+  padding-left: 20px;
+  gap: 12px;
+}
+
+.side-nav a.show-label span {
+  width: auto;
+  opacity: 1;
+}
+
+/* active but minimized after 2 sec */
 .side-nav a.active span {
-  display: inline-block;
-  font-size: 20px;
-  font-weight: 500;
+  width: 0;
+  opacity: 0;
 }
-
 /* HOME SECTION */
 
 
@@ -1026,8 +1053,83 @@ body {
     font-size: 16px;
   }
 
-
-
-
   
+}
+/* ===== FIX SIDEBAR LABEL VISIBILITY ===== */
+
+.side-nav a {
+  width: 58px;
+  height: 58px;
+  border-radius: 50px;
+  background: #d7d9dc;
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  overflow: hidden;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.side-nav a span {
+  display: inline-block;
+  width: 0;
+  opacity: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+}
+
+/* current section after label hides */
+.side-nav a.active {
+  background: #8178ff;
+  color: white;
+}
+
+/* when entering section OR hover */
+.side-nav a.show-label,
+.side-nav a:hover {
+  width: 160px;
+  background: #8178ff;
+  color: white;
+  justify-content: flex-start;
+  padding-left: 20px;
+  gap: 12px;
+}
+
+/* show text */
+.side-nav a.show-label span,
+.side-nav a:hover span {
+  width: auto;
+  opacity: 1;
+  color: white;
+}
+
+
+
+
+.side-nav a.active {
+  background: #8178ff;
+  color: white;
+}
+
+.side-nav a.active span {
+  width: 0;
+  opacity: 0;
+}
+
+.side-nav a.show-label {
+  width: 160px;
+  background: #657af3;
+  color: white;
+  justify-content: flex-start;
+  padding-left: 20px;
+  gap: 12px;
+}
+
+.side-nav a.show-label span {
+  width: auto;
+  opacity: 1;
+  color: rgb(226, 229, 237);
 }

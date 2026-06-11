@@ -71,82 +71,146 @@ const sendEmail = (e) => {
     });
 };
 
-
-
-
-
-
-
-  const [activeSection, setActiveSection] = useState("home");
+const [showLabel, setShowLabel] = useState("home");
+const [activeSection, setActiveSection] = useState("home");
+//const [showLabel, setShowLabel] = useState(true);
 useEffect(() => {
-  const sections = document.querySelectorAll("section");
+  let timer;
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.intersectionRatio > 0.3) {
-          setActiveSection(entry.target.id);
-        }
-      });
-    },
-    {
-      threshold: [0.3, 0.5, 0.7],
-      rootMargin: "-100px 0px -100px 0px",
-    }
-  );
+  const handleScroll = () => {
+    const sections = document.querySelectorAll("section");
 
-  sections.forEach((section) => {
-    observer.observe(section);
-  });
+    let current = "home";
+    let maxVisible = 0;
 
-  return () => observer.disconnect();
+    sections.forEach((section) => {
+      const rect = section.getBoundingClientRect();
+
+      const visible =
+        Math.min(rect.bottom, window.innerHeight) -
+        Math.max(rect.top, 0);
+
+      if (visible > maxVisible) {
+        maxVisible = visible;
+        current = section.id;
+      }
+    });
+
+    setActiveSection((prev) => {
+      if (prev !== current) {
+        setShowLabel(current);
+
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+          setShowLabel("");
+        }, 2000);
+
+        return current;
+      }
+
+      return prev;
+    });
+  };
+
+  window.addEventListener("scroll", handleScroll);
+  handleScroll();
+
+  return () => {
+    window.removeEventListener("scroll", handleScroll);
+    clearTimeout(timer);
+  };
 }, []);
 
-  
   return (
     <>
       {/* LEFT SIDE NAVIGATION */}
       <nav className="side-nav">
-        <a className={activeSection === "home" ? "active" : ""} href="#home">
-          <FaHome />
-          <span>Home</span>
-        </a>
 
-<a
-  className={activeSection === "about" ? "active" : ""}
-  href="#about"
->          <FaUser />
-          <span>About</span>
-        </a>
+  <a
+    className={
+      activeSection === "home"
+        ? showLabel === "home"
+          ? "active show-label"
+          : "active"
+        : ""
+    }
+    href="#home"
+  >
+    <FaHome />
+    <span>Home</span>
+  </a>
 
-<a
-  className={activeSection === "skills" ? "active" : ""}
-  href="#skills"
->          <FaAsterisk />
-          <span>Skills</span>
-        </a>
+  <a
+    className={
+      activeSection === "about"
+        ? showLabel === "about"
+          ? "active show-label"
+          : "active"
+        : ""
+    }
+    href="#about"
+  >
+    <FaUser />
+    <span>About</span>
+  </a>
 
-<a
-  className={activeSection === "resume" ? "active" : ""}
-  href="#resume"
->          <FaRegFileAlt />
-          <span>Resume</span>
-        </a>
+  <a
+    className={
+      activeSection === "skills"
+        ? showLabel === "skills"
+          ? "active show-label"
+          : "active"
+        : ""
+    }
+    href="#skills"
+  >
+    <FaAsterisk />
+    <span>Skills</span>
+  </a>
 
-<a
-  className={activeSection === "portfolio" ? "active" : ""}
-  href="#portfolio"
->          <FaBriefcase />
-          <span>Portfolio</span>
-        </a>
+  <a
+    className={
+      activeSection === "resume"
+        ? showLabel === "resume"
+          ? "active show-label"
+          : "active"
+        : ""
+    }
+    href="#resume"
+  >
+    <FaRegFileAlt />
+    <span>Resume</span>
+  </a>
 
-<a
-  className={activeSection === "contact" ? "active" : ""}
-  href="#contact"
->          <FaEnvelope />
-          <span>Contact</span>
-        </a>
-      </nav>
+  <a
+    className={
+      activeSection === "portfolio"
+        ? showLabel === "portfolio"
+          ? "active show-label"
+          : "active"
+        : ""
+    }
+    href="#portfolio"
+  >
+    <FaBriefcase />
+    <span>Portfolio</span>
+  </a>
+
+  <a
+    className={
+      activeSection === "contact"
+        ? showLabel === "contact"
+          ? "active show-label"
+          : "active"
+        : ""
+    }
+    href="#contact"
+  >
+    <FaEnvelope />
+    <span>Contact</span>
+  </a>
+
+</nav>
 
       {/* HOME SECTION */}
       <section
