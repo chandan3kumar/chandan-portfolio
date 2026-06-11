@@ -1133,3 +1133,35 @@ body {
   opacity: 1;
   color: rgb(226, 229, 237);
 }
+
+
+
+@media (max-width: 768px) {
+  .side-nav a.show-label {
+    width: 58px !important;
+    padding-left: 0 !important;
+    justify-content: center !important;
+    gap: 0 !important;
+  }
+
+  .side-nav a.show-label span {
+    width: 0 !important;
+    opacity: 0 !important;
+  }
+}
+
+/* ===== GLOBAL SIZE REDUCE FIX ===== */
+
+/* Reduce size of all sections except Hero */
+
+@media (min-width: 1024px) {
+
+  .about-section,
+  .skills-section,
+  .resume-section,
+  .portfolio-section,
+  .contact-section {
+    zoom: 0.8;
+  }
+
+}

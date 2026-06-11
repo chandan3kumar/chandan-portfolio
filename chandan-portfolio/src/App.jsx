@@ -1,7 +1,7 @@
 import "./App.css";
-
+import { useEffect, useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
-import { useEffect, useState } from "react";
+//import { useEffect, useState } from "react";
 import { TypeAnimation } from "react-type-animation";
 import {
   FaHome,
@@ -73,6 +73,7 @@ const sendEmail = (e) => {
 
 const [showLabel, setShowLabel] = useState("home");
 const [activeSection, setActiveSection] = useState("home");
+const labelTimer = useRef(null);
 //const [showLabel, setShowLabel] = useState(true);
 useEffect(() => {
   let timer;
