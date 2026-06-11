@@ -202,11 +202,11 @@ useEffect(() => {
               <FaInstagram />
             </a>
 <a
- href="public/chandanRESUME.pdf"
- download
- className="resume-btn"
+  href="/chandanRESUME.pdf"
+  download
+  className="resume-btn"
 >
- Download Resume
+  Download Resume
 </a>
 
 
